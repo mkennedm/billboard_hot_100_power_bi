@@ -27,7 +27,7 @@ My data source was the file combined_1958_08_04_to_2023_10_21.csv. I used Power 
 I dropped the columns for “weeks-on-board”, “peak-rank”, and “last-week”. The only one of these that was used in any of the visualizations was “peak-rank”. I chose to remove it because it contained multiple peaks for songs that rose in the chart from one week to another. I only needed the highest of the peaks and knew I could get this same information by creating a new measure in the “rank” column.
 
 The full set of Power Query steps can be found below.
-
+```
 let
 	Source = Csv.Document(File.Contents("G:\My Drive\Career\data analyst projects\music charts\csv_file_that_should_be_used_in_pwer_bi\combined_1958_08_04_to_2023_10_21.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 	#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
@@ -36,18 +36,18 @@ let
 	#"Removed Duplicates" = Table.Distinct(#"Removed Columns")
 in
 	#"Removed Duplicates"
-
-I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: Year = YEAR('charts_for_project'[date])
+```
+I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
 
 
 
 
 
 Next, I was able to use this DAX expression to create the new table.
-
+```
 ArtistYearCount =
 SUMMARIZE('charts_for_project', 'charts_for_project'[Year], 'charts_for_project'[artist], "Count", COUNTROWS('charts_for_project'))
-
+```
 
 
 
@@ -56,21 +56,21 @@ Then I created an active many-to-many relationship between the ArtistsYearCount 
 
 The last table I created was UniqueSongs which is used to reduce the data from charts_for_project to just one row for each song and store the peak rank out of all the times the song appeared in the Hot 100. The DAX expression is below.
 
-
+```
 UniqueSongs =
 SUMMARIZE(
     charts_for_project,
     charts_for_project[artist],
     charts_for_project[song]
 )
-
+```
 
 Here, I also created an active many-to-many relationship between the UniqueSongs and charts_for_project_table on the artist column of both tables.
 
 
 Then I added the column “peak”.
 
-
+```
 peak =
 MINX(
     FILTER(
@@ -79,17 +79,17 @@ MINX(
     ),
     charts_for_project[rank]
 )
-
+```
 
 The Data by Artist page of the report contains a card that shows the number of songs a selected artist has that made it to a number 1 rank. This required the creation of an additional measure on the UniqueSongs table.
 
-
+```
 Number Ones Count =
 CALCULATE(
     COUNTROWS(UniqueSongs),
     UniqueSongs[peak] = 1
 )
-
+```
 
 Below is an image of the model view from Power BI desktop.
 
