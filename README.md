@@ -38,7 +38,7 @@ in
     #"Removed Columns"
 ```
 
-I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
+I had to create two additional tables for the visualizations present in the report. The first was `ArtistYearCount`, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
 
 Next, I was able to use this DAX expression to create the new table.
 ```
@@ -49,7 +49,7 @@ SUMMARIZE('charts_for_project', 'charts_for_project'[Year], 'charts_for_project'
 Then I created an active many-to-many relationship between the ArtistsYearCount and charts_for_project table on the artist column in both tables.
 
 
-The last table I created was UniqueSongs which is used to reduce the data from charts_for_project to just one row for each song and store the peak rank out of all the times the song appeared in the Hot 100. The DAX expression is below.
+The last table I created was `UniqueSongs` which is used to reduce the data from charts_for_project to just one row for each song and store the peak rank out of all the times the song appeared in the Hot 100. The DAX expression is below.
 
 ```
 UniqueSongs =
@@ -60,7 +60,7 @@ SUMMARIZE(
 )
 ```
 
-Here, I also created an active many-to-many relationship between the UniqueSongs and charts_for_project_table on the artist column of both tables.
+Here, I also created an active many-to-many relationship between the UniqueSongs and `charts_for_project` table on the artist column of both tables.
 
 Then I added the column “peak”.
 
@@ -75,7 +75,7 @@ MINX(
 )
 ```
 
-The Data by Artist page of the report contains a card that shows the number of songs a selected artist has that made it to a number 1 rank. This required the creation of an additional measure on the UniqueSongs table.
+The Data by Artist page of the report contains a card that shows the number of songs a selected artist has that made it to a number 1 rank. This required the creation of an additional measure on the `UniqueSongs` table.
 
 ```
 Number Ones Count =
