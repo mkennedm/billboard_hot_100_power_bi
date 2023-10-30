@@ -29,14 +29,14 @@ I dropped the columns for “weeks-on-board”, “peak-rank”, and “last-wee
 The full set of Power Query steps can be found below.
 ```
 let
-	Source = Csv.Document(File.Contents("G:\My Drive\Career\data analyst projects\music charts\csv_file_that_should_be_used_in_pwer_bi\combined_1958_08_04_to_2023_10_21.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
-	#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-	#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"rank", Int64.Type}, {"song", type text}, {"artist", type text}, {"last-week", Int64.Type}, {"peak-rank", Int64.Type}, {"weeks-on-board", Int64.Type}, {"collaborators", type text}}),
-	#"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"weeks-on-board", "peak-rank", "collaborators", "last-week"}),
-	#"Removed Duplicates" = Table.Distinct(#"Removed Columns")
+    Source = Csv.Document(File.Contents("G:\My Drive\Career\data analyst projects\music charts\csv_file_that_should_be_used_in_pwer_bi\billboard_hot_100_1958_08_04_to_2023_10_21.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"rank", Int64.Type}, {"song", type text}, {"artist", type text}, {"last-week", Int64.Type}, {"peak-rank", Int64.Type}, {"weeks-on-board", Int64.Type}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"weeks-on-board", "peak-rank", "last-week", ""})
 in
-	#"Removed Duplicates"
+    #"Removed Columns"
 ```
+
 I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
 
 
