@@ -6,10 +6,12 @@ This report contains data from the Billboard Hot 100 Chart from its beginning on
 
 The first page is Data by Year, which allows users to filter the data down to a specific year or range of years (ex: 2003 - 2008). Once a time period is selected, this page will display a list of all the artists who appeared on the chart within that time period and the number of times they appeared on the chart. There’s also a column chart of the top 5 artists.
 
+![data_by_year](https://github.com/mkennedm/billboard_hot_100_power_bi/assets/8769212/85d819e1-7d8e-42bd-85ca-ca96395c8167)
 
 
 The second page is Data by Artist which allows users to search for any artist that appeared on the chart from August 4, 1958 to October 21, 2023. Once an artist is selected, the page shows a table that includes the names of their songs and each song’s peak rank. There’s a card which displays the unique number of songs that made it to the #1 rank, and a column chart that shows the number of times the artist appeared on the chart each year.
 
+![data_by_artist](https://github.com/mkennedm/billboard_hot_100_power_bi/assets/8769212/adebfb26-38b2-43ca-a67d-d7e4715bad7a)
 
 
 ## Data Collection
