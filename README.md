@@ -19,7 +19,7 @@ I started by writing the python file ![get_recent_charts.csv](https://github.com
 
 This project relies on the ![billboard Python library](https://github.com/guoguo12/billboard-charts) function `ChartData` which takes in a chart name (“hot-100” in this case) and a date as a string (“2023-10-21” for example). It returns a `ChartData` object containing the relevant chart. If there was no chart released on the given day then the function returns the chart for the closest chart in the future. For example, if the input date is “2023-10-20” then the chart for “2023-10-21” will be returned.
 
-Finally, I wanted to discuss the `combine_CSVs` function briefly. Gathering over 60 years worth of data takes over an hour for the code to execute. During development it was more efficient to work with portions of the data then combine them into one later on. This function made use of ![Pandas DataFrames](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) for faster execution.
+Finally, I wanted to discuss the `combine_CSVs` function briefly. Gathering over 60 years worth of data takes over an hour for the code to execute. During development it was more efficient to work with portions of the data then combine them into one later on. This function made use of [Pandas DataFrames](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) for faster execution.
 
 ## Data Modeling
 
