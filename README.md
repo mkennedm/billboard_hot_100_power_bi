@@ -16,15 +16,15 @@ The second page is Data by Artist which allows users to search for any artist th
 
 ## Data Collection
 
-I started by writing the python file ![get_recent_charts.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/get_recent_charts.py). The function create_new_csv produces a csv containing columns date, rank, song, artist, last-week, peak-rank, weeks-on-board, and collaborators. 100 rows are populated for each week starting with the most recent Saturday the function is run and works backward to August 4, 1958. This 1958 starting date was chosen because it is the beginning of the Hot 100 chart. It’s also, notably, a Monday. Beginning on January 6, 1962, the charts have Saturday dates.
+I started by writing the python file ![get_recent_charts.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/get_recent_charts.py). The function `create_new_csv` produces a csv containing columns date, rank, song, artist, last-week, peak-rank, weeks-on-board, and collaborators. 100 rows are populated for each week starting with the most recent Saturday the function is run and works backward to August 4, 1958. This 1958 starting date was chosen because it is the beginning of the Hot 100 chart. It’s also, notably, a Monday. Beginning on January 6, 1962, the charts have Saturday dates.
 
-This project relies on the billboard Python library function ChartData which takes in a chart name (“hot-100” in this case) and a date as a string (“2023-10-21” for example). It returns a ChartData object containing the relevant chart. If there was no chart released on the given day then the function returns the chart for the closest chart in the future. For example, if the input date is “2023-10-20” then the chart for “2023-10-21” will be returned.
+This project relies on the ![billboard Python library](https://github.com/guoguo12/billboard-charts) function `ChartData` which takes in a chart name (“hot-100” in this case) and a date as a string (“2023-10-21” for example). It returns a `ChartData` object containing the relevant chart. If there was no chart released on the given day then the function returns the chart for the closest chart in the future. For example, if the input date is “2023-10-20” then the chart for “2023-10-21” will be returned.
 
-Finally, I wanted to discuss the combine_CSVs function briefly. Gathering over 60 years worth of data takes over an hour for the code to execute. During development it was more efficient to work with portions of the data then combine them into one later on. This function made use of Pandas DataFrames for faster execution.
+Finally, I wanted to discuss the `combine_CSVs` function briefly. Gathering over 60 years worth of data takes over an hour for the code to execute. During development it was more efficient to work with portions of the data then combine them into one later on. This function made use of ![Pandas DataFrames](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) for faster execution.
 
 ## Data Modeling
 
-My data source was the file combined_1958_08_04_to_2023_10_21.csv. I used Power Query to make the report faster by dropping some unneeded columns.
+My data source was the file ![billboard_hot_100_1958_08_04_to_2023_10_21.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/billboard_hot_100_1958_08_04_to_2023_10_21.csv). I used Power Query to make the report faster by dropping some unneeded columns.
 
 I dropped the columns for “weeks-on-board”, “peak-rank”, and “last-week”. The only one of these that was used in any of the visualizations was “peak-rank”. I chose to remove it because it contained multiple peaks for songs that rose in the chart from one week to another. I only needed the highest of the peaks and knew I could get this same information by creating a new measure in the “rank” column.
 
@@ -40,8 +40,6 @@ in
 ```
 
 I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
-
-
 
 
 
