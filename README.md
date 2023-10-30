@@ -16,7 +16,7 @@ The second page is Data by Artist which allows users to search for any artist th
 
 ## Data Collection
 
-I started by writing the python file get_recent_charts.csv. The function create_new_csv produces a csv containing columns date, rank, song, artist, last-week, peak-rank, weeks-on-board, and collaborators. 100 rows are populated for each week starting with the most recent Saturday the function is run and works backward to August 4, 1958. This 1958 starting date was chosen because it is the beginning of the Hot 100 chart. It’s also, notably, a Monday. Beginning on January 6, 1962, the charts have Saturday dates.
+I started by writing the python file ![get_recent_charts.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/get_recent_charts.py). The function create_new_csv produces a csv containing columns date, rank, song, artist, last-week, peak-rank, weeks-on-board, and collaborators. 100 rows are populated for each week starting with the most recent Saturday the function is run and works backward to August 4, 1958. This 1958 starting date was chosen because it is the beginning of the Hot 100 chart. It’s also, notably, a Monday. Beginning on January 6, 1962, the charts have Saturday dates.
 
 This project relies on the billboard Python library function ChartData which takes in a chart name (“hot-100” in this case) and a date as a string (“2023-10-21” for example). It returns a ChartData object containing the relevant chart. If there was no chart released on the given day then the function returns the chart for the closest chart in the future. For example, if the input date is “2023-10-20” then the chart for “2023-10-21” will be returned.
 
