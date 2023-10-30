@@ -1,5 +1,4 @@
-# billboard_hot_100_power_bi
-
+# Billboard Hot 100 Power BI Report
 ## Visualizations
 
 This report contains data from the Billboard Hot 100 Chart from its beginning on August 4, 1958 to October 21, 2023. It counts the number of times artists appear across many Hot 100 charts from it's beginning in 1958 to when I finished collecting data for this project. The count includes each row for each song and artist had in the chart each week. If a single song appears in the chart four separate weeks then that counts as 4 appearances in the chart. The report contains two pages.
