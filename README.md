@@ -95,5 +95,6 @@ CALCULATE(
 
 Below is an image of the model view from Power BI desktop.
 
+![model_view](https://github.com/mkennedm/billboard_hot_100_power_bi/assets/8769212/105dcf85-4783-41ab-9f21-a326e075556c)
 
 
