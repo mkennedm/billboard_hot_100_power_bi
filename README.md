@@ -2,7 +2,7 @@
 
 ## Visualizations
 
-This report contains data from the Billboard Hot 100 Chart from its beginning on August 4, 1958 to October 21, 2023. The report contains two pages.
+This report contains data from the Billboard Hot 100 Chart from its beginning on August 4, 1958 to October 21, 2023. It counts the number of times artists appear across many Hot 100 charts from it's beginning in 1958 to when I finished collecting data for this project. The count includes each row for each song and artist had in the chart each week. If a single song appears in the chart four separate weeks then that counts as 4 appearances in the chart. The report contains two pages.
 
 The first page is Data by Year, which allows users to filter the data down to a specific year or range of years (ex: 2003 - 2008). Once a time period is selected, this page will display a list of all the artists who appeared on the chart within that time period and the number of times they appeared on the chart. There’s also a column chart of the top 5 artists.
 
@@ -24,7 +24,7 @@ Finally, I wanted to discuss the `combine_CSVs` function briefly. Gathering over
 
 ## Data Modeling
 
-My data source was the file ![billboard_hot_100_1958_08_04_to_2023_10_21.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/billboard_hot_100_1958_08_04_to_2023_10_21.csv). I used Power Query to make the report faster by dropping some unneeded columns.
+My data source was the file ![billboard_hot_100_1958_08_04_to_2023_10_21.csv](https://github.com/mkennedm/billboard_hot_100_power_bi/blob/main/billboard_hot_100_1958_08_04_to_2023_10_21.csv). This became the Power BI table `charts_for_project` I used Power Query to make the report faster by dropping some unneeded columns.
 
 I dropped the columns for “weeks-on-board”, “peak-rank”, and “last-week”. The only one of these that was used in any of the visualizations was “peak-rank”. I chose to remove it because it contained multiple peaks for songs that rose in the chart from one week to another. I only needed the highest of the peaks and knew I could get this same information by creating a new measure in the “rank” column.
 
@@ -41,15 +41,11 @@ in
 
 I had to create two additional tables for the visualizations present in the report. The first was ArtistYearCount, which is used to calculate the number of times each artist appeared on the Billboard Chart each year. To make this table, I first had to add a Year column to charts_for_project with the following DAX expression: `Year = YEAR('charts_for_project'[date])`
 
-
-
 Next, I was able to use this DAX expression to create the new table.
 ```
 ArtistYearCount =
 SUMMARIZE('charts_for_project', 'charts_for_project'[Year], 'charts_for_project'[artist], "Count", COUNTROWS('charts_for_project'))
 ```
-
-
 
 Then I created an active many-to-many relationship between the ArtistsYearCount and charts_for_project table on the artist column in both tables.
 
@@ -66,7 +62,6 @@ SUMMARIZE(
 ```
 
 Here, I also created an active many-to-many relationship between the UniqueSongs and charts_for_project_table on the artist column of both tables.
-
 
 Then I added the column “peak”.
 
