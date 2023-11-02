@@ -12,6 +12,10 @@ The second page is Data by Artist which allows users to search for any artist th
 
 ![data_by_artist](https://github.com/mkennedm/billboard_hot_100_power_bi/assets/8769212/adebfb26-38b2-43ca-a67d-d7e4715bad7a)
 
+Watch a video of the report here:
+
+https://github.com/mkennedm/billboard_hot_100_power_bi/assets/8769212/43b9cd83-9347-40e3-a0a2-6be82587d7d8
+
 
 ## Data Collection
 
